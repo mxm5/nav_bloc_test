@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'page_widget.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -53,21 +54,15 @@ class _MyHomePageState extends State<MyHomePage> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     final pages = [
-      Page(
-        width: width,
-        height: height,
+      MyPage(
         color: Colors.green,
         title: 'home',
       ),
-      Page(
-        width: width,
-        height: height,
+      MyPage(
         title: 'profile',
         color: Colors.red,
       ),
-      Page(
-        width: width,
-        height: height,
+      MyPage(
         color: Colors.blue,
         title: 'settings',
       ),
@@ -103,38 +98,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-class Page extends StatelessWidget {
-  const Page({
-    Key key,
-    @required this.width,
-    @required this.height,
-    @required this.title,
-    @required this.color,
-  }) : super(key: key);
-
-  final double width;
-  final Color color;
-  final String title;
-  final double height;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      color: color.withOpacity(0.3),
-      child: Center(
-        child: CircleAvatar(
-          radius: 150,
-          backgroundColor: color.withRed(100).withOpacity(0.5),
-          child: Text(
-            title,
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
