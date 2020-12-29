@@ -1,5 +1,8 @@
 import 'dart:ffi';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nav_bloc_test/bloc/navigation_bloc.dart';
+
 import 'page_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +21,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+
+      home: BlocProvider<NavigationBloc>(
+          create: (context) => NavigationBloc(),
+          child: MyHomePage(title: 'Flutter Demo Home Page')),
     );
   }
 }
@@ -51,8 +57,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
     final pages = [
       MyPage(
         color: Colors.green,
@@ -68,14 +72,19 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     ];
     //
+    // BlocProvider<NavigationBloc>(
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
         backgroundColor: pages[_selectedIndex].color,
       ),
-      body: pages[_selectedIndex],
+      body: BlocBuilder<NavigationBloc, Widget>(
+        builder: (context, widget) {
+          return widget;
+        },
+      ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: pages[_selectedIndex].color,
+        backgroundColor: Colors.green,
         currentIndex: _selectedIndex,
         items: [
           BottomNavigationBarItem(
@@ -93,7 +102,17 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
         unselectedItemColor: Colors.cyanAccent.withOpacity(0.6),
         selectedItemColor: Colors.white,
-        onTap: Handletap,
+        onTap: (i) {
+          if (i == 0) {
+            context.bloc<NavigationBloc>().add(navigationEvents.navHome);
+          }
+          if (i == 1) {
+            context.bloc<NavigationBloc>().add(navigationEvents.navProfile);
+          }
+          if (i == 2) {
+            context.bloc<NavigationBloc>().add(navigationEvents.navSettings);
+          }
+        },
       ),
     );
   }

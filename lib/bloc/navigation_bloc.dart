@@ -10,25 +10,26 @@ enum navigationEvents {
   navProfile,
 }
 
-class NavigationBloc extends Bloc<navigationEvents, Widget> {
-  static var pages = const [
-    MyPage(
-      color: Colors.green,
-      title: 'home',
-    ),
-    MyPage(
-      title: 'profile',
-      color: Colors.red,
-    ),
-    MyPage(
-      color: Colors.blue,
-      title: 'settings',
-    ),
-  ];
-  NavigationBloc(Widget initialState) : super(pages[0]);
+var pages = const [
+  MyPage(
+    color: Colors.green,
+    title: 'home',
+  ),
+  MyPage(
+    title: 'profile',
+    color: Colors.red,
+  ),
+  MyPage(
+    color: Colors.blue,
+    title: 'settings',
+  ),
+];
+
+class NavigationBloc extends Bloc<navigationEvents, MyPage> {
+  NavigationBloc() : super(pages[0]);
 
   @override
-  Stream<Widget> mapEventToState(navigationEvents event) async* {
+  Stream<MyPage> mapEventToState(navigationEvents event) async* {
     if (event == navigationEvents.navHome) {
       yield pages[0];
     }

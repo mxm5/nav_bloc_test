@@ -1,0 +1,4 @@
+#Tue Dec 29 21:01:32 CET 2020
+base.0=/home/derian/Desktop/flutter projects/BLoC/nav_bloc_test/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
