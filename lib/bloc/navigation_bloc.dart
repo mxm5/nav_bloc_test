@@ -8,6 +8,7 @@ enum navigationEvents {
   navHome,
   navSettings,
   navProfile,
+  navCounter,
 }
 
 var pages = const [
@@ -22,6 +23,10 @@ var pages = const [
   MyPage(
     color: Colors.blue,
     title: 'settings',
+  ),
+  MyPage(
+    color: Colors.purple,
+    title: 'counter',
   ),
 ];
 
@@ -38,6 +43,9 @@ class NavigationBloc extends Bloc<navigationEvents, MyPage> {
     }
     if (event == navigationEvents.navSettings) {
       yield pages[2];
+    }
+    if (event == navigationEvents.navCounter) {
+      yield pages[3];
     }
     throw UnimplementedError();
   }
