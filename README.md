@@ -1,6 +1,6 @@
 # nav_bloc_test
 
-created for testing bloc pattern
+created for testing bloc pattern g
 |   |   | 
 |-------------- | -------------- | 
 | ![screen](a.jpeg)    | ![screen](b.jpeg)     | 
